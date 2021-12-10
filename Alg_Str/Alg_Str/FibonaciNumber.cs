@@ -2,7 +2,7 @@
 
 namespace Alg_Str
 {
-   static class FibonaciNumber
+    static class FibonaciNumber
     {
         /// <summary>
         /// Вычисляет n-ый член последовательности Фибоначчи. Рекурсивный метод.
