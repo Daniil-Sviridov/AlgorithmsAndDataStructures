@@ -9,7 +9,8 @@ namespace Alg_Str
         {
         new Lesson1PrimeNumber(),
         new Lesson1FibNumbers(),
-        new Lesson2()
+        new Lesson2(),
+        new Lesson3()
         };
 
         static void PrintHead()
