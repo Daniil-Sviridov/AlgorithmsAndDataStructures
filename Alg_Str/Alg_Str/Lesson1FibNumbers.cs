@@ -27,11 +27,11 @@ namespace Alg_Str
 
             Console.WriteLine(D);
 
-            for(int i = 0; i < ar.Length; i++)
+            for (int i = 0; i < ar.Length; i++)
             {
                 Console.Write($"{ar[i]} ");
             }
-            
+
         }
 
         /// <summary>

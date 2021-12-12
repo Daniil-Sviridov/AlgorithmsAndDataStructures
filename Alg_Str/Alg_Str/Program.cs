@@ -8,7 +8,8 @@ namespace Alg_Str
         static List<ILesson> lessons = new List<ILesson>()
         {
         new Lesson1PrimeNumber(),
-        new Lesson1FibNumbers()
+        new Lesson1FibNumbers(),
+        new Lesson2()
         };
 
         static void PrintHead()
@@ -27,13 +28,13 @@ namespace Alg_Str
 
             PrintHead();
             string key = Console.ReadLine();
-            
-            while(key != "exit")
+
+            while (key != "exit")
             {
                 foreach (ILesson lesson in lessons)
                 {
-                    if (lesson.Name == key) 
-                    { 
+                    if (lesson.Name == key)
+                    {
                         lesson.Demo();
                         Console.WriteLine("Для продолжения нажмите любую клавишу...");
                         Console.ReadKey();

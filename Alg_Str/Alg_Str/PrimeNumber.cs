@@ -2,7 +2,7 @@
 
 namespace Alg_Str
 {
- 
+
     static class PrimeNumber
     {
         /// <summary>
@@ -16,16 +16,16 @@ namespace Alg_Str
             int i = 2;
             int d = 0;
 
-            while(i<n) 
+            while (i < n)
             {
                 if (n % i == 0)
                 {
                     d++;
-                }                
-                i++;                
+                }
+                i++;
             };
 
-            return d == 0 ? true: false;
+            return d == 0 ? true : false;
         }
 
         /// <summary>
@@ -35,8 +35,8 @@ namespace Alg_Str
         /// <returns>boolean false/true</returns>
         public static bool ItPrime2(int n)
         {
-            for (int i = 2; i < n; i++) 
-            { 
+            for (int i = 2; i < n; i++)
+            {
                 if (n % i == 0) return false;
             };
             return true;
