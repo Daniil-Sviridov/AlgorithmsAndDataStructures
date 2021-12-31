@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace Alg_Str
@@ -147,6 +148,100 @@ namespace Alg_Str
 
             return null;
 
+        }
+
+        public BinaryTree<T> FindNodeBFS(T value, BinaryTree<T> startNode = null)
+        {
+
+            var queue = new Queue<BinaryTree<T>>();
+
+            queue.Enqueue(startNode ?? Parent);
+
+            if (queue.Peek() == null) return null;
+
+            Console.WriteLine($"Добавляем корневой элемент в очередь: { queue.Peek().GetData()}");
+
+            while (queue.Count > 0)
+            {
+                if (queue.Peek().Left != null)
+                {
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine($"Добавляем левый элемент в очередь: { queue.Peek().Left.GetData()}");
+                    queue.Enqueue(queue.Peek().Left);
+                }
+                if (queue.Peek().Right != null)
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine($"Добавляем правый элемент в очередь: { queue.Peek().Right.GetData()}");
+                    queue.Enqueue(queue.Peek().Right);
+                }
+
+                if (value.CompareTo(queue.Peek().GetData()) == 0)
+                {
+                    Console.ForegroundColor = ConsoleColor.Magenta;
+                    Console.WriteLine($"Искомый элемент найден: { queue.Peek().GetData()}");
+                    Console.ResetColor();
+                    return queue.Peek();
+                }
+
+                Console.ResetColor();
+                Console.WriteLine($"Удаляем элемент из очереди: { queue.Peek().GetData()}");
+                queue.Dequeue();
+            }
+
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine($"Искомый элемент не найден!!!");
+            Console.ResetColor();
+            return null;
+        }
+
+        public BinaryTree<T> FindNodeDFS(T value, BinaryTree<T> startNode = null)
+        {
+            var stak = new Stack<BinaryTree<T>>();
+
+            var root = startNode ?? Parent;
+
+            if (root == null) return null;
+
+            stak.Push(root);
+
+            Console.WriteLine($"Добавляем корневой элемент стек: { root.GetData()}");
+
+            while (stak.Count > 0)
+            {
+                var node = stak.Pop();
+
+                Console.WriteLine($"Извлекаем элемент из стека: { node.GetData()}");
+
+                if (node.Left != null)
+                {
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine($"Добавляем левый элемент в стек: { node.Left.GetData()}");
+                    Console.ResetColor();
+                    stak.Push(node.Left);
+                }
+                if (node.Right != null)
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine($"Добавляем правый элемент в стек: { node.Right.GetData()}");
+                    Console.ResetColor();
+                    stak.Push(node.Right);
+                }
+
+                if (value.CompareTo(node.GetData()) == 0)
+                {
+                    Console.ForegroundColor = ConsoleColor.Magenta;
+                    Console.WriteLine($"Искомый элемент найден: { node.GetData()}");
+                    Console.ResetColor();
+                    return node;
+                }
+
+            }
+
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine($"Искомый элемент не найден!!!");
+            Console.ResetColor();
+            return null;
         }
 
         /// <summary>
