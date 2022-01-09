@@ -7,7 +7,7 @@ using System.Xml.Serialization;
 
 namespace Alg_Str
 {
-    
+
     /// <summary>
     /// Массив злементов заданий десериализация XML
     /// </summary>
@@ -58,19 +58,19 @@ namespace Alg_Str
             HWorks newPerson = new();
             // десериализsация
             FileStream fs = new FileStream($"{Directory.GetCurrentDirectory()}\\ListXML.xml", FileMode.OpenOrCreate);
-            
-            HWorks hw = (HWorks)formatter.Deserialize(fs);
-            
 
-            for(int i = 0; i < hw.tasks.Length; i++)
+            HWorks hw = (HWorks)formatter.Deserialize(fs);
+
+
+            for (int i = 0; i < hw.tasks.Length; i++)
             {
                 lessons.Add((ILesson)Activator.CreateInstance(Type.GetType($"Alg_Str.{hw.tasks[i].Tname}")));
             }
 
             PrintHead();
-            
+
             string key = Console.ReadLine();
-            
+
             while (key != "exit")
             {
                 foreach (ILesson lesson in lessons)
