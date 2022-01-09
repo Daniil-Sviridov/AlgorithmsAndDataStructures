@@ -5,6 +5,9 @@ namespace Alg_Str
 {
     class Program
     {
+
+        //Чтение XML
+
         static List<ILesson> lessons = new List<ILesson>()
         {
         new Lesson1PrimeNumber(),
