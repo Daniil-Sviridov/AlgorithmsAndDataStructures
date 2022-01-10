@@ -1,11 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Xml;
+using System.Xml.Serialization;
+
 
 namespace Alg_Str
 {
+
+    /// <summary>
+    /// Массив злементов заданий десериализация XML
+    /// </summary>
+    public class HWorks
+    {
+        public Task[] tasks;
+    }
+    /// <summary>
+    /// Элемент задания. Десериализация XML
+    /// </summary>
+    public class Task
+    {
+        public string Tname;
+    }
+
     class Program
     {
-        static List<ILesson> lessons = new List<ILesson>()
+
+        static List<ILesson> lessons = new List<ILesson>();
+
+        /*static List<ILesson> lessons = new List<ILesson>()
         {
         new Lesson1PrimeNumber(),
         new Lesson1FibNumbers(),
@@ -13,7 +36,9 @@ namespace Alg_Str
         new Lesson3(),
         new Lesson4Task1(),
         new Lesson5()
-        };
+        };*/
+
+
 
         static void PrintHead()
         {
@@ -29,7 +54,21 @@ namespace Alg_Str
         static void Main(string[] args)
         {
 
+            XmlSerializer formatter = new XmlSerializer(typeof(HWorks));
+            HWorks newPerson = new();
+            // десериализsация
+            FileStream fs = new FileStream($"{Directory.GetCurrentDirectory()}\\ListXML.xml", FileMode.OpenOrCreate);
+
+            HWorks hw = (HWorks)formatter.Deserialize(fs);
+
+
+            for (int i = 0; i < hw.tasks.Length; i++)
+            {
+                lessons.Add((ILesson)Activator.CreateInstance(Type.GetType($"Alg_Str.{hw.tasks[i].Tname}")));
+            }
+
             PrintHead();
+
             string key = Console.ReadLine();
 
             while (key != "exit")
@@ -47,41 +86,6 @@ namespace Alg_Str
 
                 key = Console.ReadLine();
             }
-
-            /*  Console.WriteLine(PrimeNumber.ItPrime(7));
-
-              Console.WriteLine(PrimeNumber.ItPrime2(7));
-
-
-              int[] a = FibonaciNumber.GetSubsequenceFib_cycle(10);
-
-              for (int i = 0; i < a.Length; i++) 
-                  {
-                  Console.Write($"{ a[i]} ");
-                  };
-
-              Console.WriteLine();
-
-              Console.Write(FibonaciNumber.GetFibNumber_recursion(1));
-              Console.Write(" ");
-              Console.Write(FibonaciNumber.GetFibNumber_recursion(2));
-              Console.Write(" ");
-              Console.Write(FibonaciNumber.GetFibNumber_recursion(3));
-              Console.Write(" ");
-              Console.Write(FibonaciNumber.GetFibNumber_recursion(4));
-              Console.Write(" ");
-              Console.Write(FibonaciNumber.GetFibNumber_recursion(5));
-              Console.Write(" ");
-              Console.Write(FibonaciNumber.GetFibNumber_recursion(6));
-              Console.Write(" ");
-              Console.Write(FibonaciNumber.GetFibNumber_recursion(7));
-              Console.Write(" ");
-              Console.Write(FibonaciNumber.GetFibNumber_recursion(8));
-              Console.Write(" ");
-              Console.Write(FibonaciNumber.GetFibNumber_recursion(9));
-              Console.Write(" ");
-              Console.Write(FibonaciNumber.GetFibNumber_recursion(10));
-            */
         }
     }
 }
